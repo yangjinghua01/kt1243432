@@ -14,4 +14,16 @@ class ExampleUnitTest {
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
     }
+    @Test
+    fun run(){
+       myWith("111",) { i ->
+            println(i)
+            "dsaf"
+        }
+    }
+//    高阶函数的参数是从mm(1)这里传入的。
+    fun <T,R> myWith(a:T,mm:T.(Int)->R):R{
+        return a.mm(1)
+    }
+
 }
