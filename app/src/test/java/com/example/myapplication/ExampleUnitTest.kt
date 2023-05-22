@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import kotlinx.coroutines.*
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -25,5 +26,42 @@ class ExampleUnitTest {
     fun <T,R> myWith(a:T,mm:T.(Int)->R):R{
         return a.mm(1)
     }
-
+    @Test
+    fun test(){
+        testxccancle()
+    }
+    fun testxc(){
+        runBlocking {
+            launch (Dispatchers.IO){
+                delay(10000)
+                println("11111")
+            }
+        }
+        println("a")
+        Thread.sleep(200)
+        println("B")
+    }
+    fun testxc1(){
+        runBlocking {
+            GlobalScope.launch {
+                delay(10000)
+                println("11111")
+            }
+        }
+        println("a")
+        Thread.sleep(200)
+        println("B")
+    }
+    fun testxccancle(){
+        var res =  GlobalScope.launch {
+            repeat(1000){
+                delay(10)
+                println("打印${it}")
+            }
+        }
+        println("a")
+        Thread.sleep(100)
+        res.cancel()
+        res.cancelAndJoin()
+    }
 }
